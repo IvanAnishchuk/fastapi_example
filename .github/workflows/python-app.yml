@@ -39,7 +39,7 @@ jobs:
         uses: pr-annotators/flake8-pr-annotator@v1.0.0
 
       - name: pylint annotator
-        uses: pr-annotators/flake8-pr-annotator@v1.0.0
+        uses: pr-annotators/pylint-pr-annotator@v0.0.1
 
       - name: precommit
         uses: pre-commit/action@v3.0.0
