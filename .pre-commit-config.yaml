@@ -24,10 +24,10 @@ repos:
         #additional_dependencies:
   #      #  - flake8-quotes
   - repo: local
-    # We do not use pre-commit/mirrors-mypy, 
-    # as it comes with opinionated defaults 
+    # We do not use pre-commit/mirrors-mypy,
+    # as it comes with opinionated defaults
     # (like --ignore-missing-imports)
-    # and is difficult to configure to run 
+    # and is difficult to configure to run
     # with the dependencies correctly installed.
     hooks:
       - id: mypy
@@ -42,7 +42,7 @@ repos:
         # use require_serial so that script
         # is only called once per commit
         require_serial: true
-        # Print the number of files as a sanity-check 
+        # Print the number of files as a sanity-check
         verbose: true
   - repo: local
     hooks:

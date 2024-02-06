@@ -30,7 +30,10 @@ jobs:
       - name: linters
         # this is not pretty but shows an example of installing things that are not in req.txt
         run: |
-          pip install isort mypy flake8 pylint yapf
+          pip install pre-commit mypy
+
+      - name: precommit
+        uses: pre-commit/action@v3.0.0
 
       - name: mypy annotator
         uses: pr-annotators/mypy-pr-annotator@v1.0.0
