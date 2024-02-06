@@ -1,0 +1,57 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Example FastAPI application
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
+      - name: deps
+        run: |
+          pip install -r requirements.txt
+
+      - name: linters
+        # this is not pretty but shows an example of installing things that are not in req.txt
+        run: |
+          pip install pre-commit mypy
+
+      - name: mypy annotator
+        uses: pr-annotators/mypy-pr-annotator@v1.0.0
+
+      - name: flake8 annotator
+        uses: pr-annotators/flake8-pr-annotator@v1.0.0
+
+      - name: pylint annotator
+        uses: pr-annotators/pylint-pr-annotator@v0.0.1
+
+      - name: precommit
+        uses: pre-commit/action@v3.0.0
+
+      - name: flake8
+        # different flake8, just to demonstrate
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: pytest
+        run: |
+          pytest
