@@ -33,7 +33,7 @@ def read_alternatives(question_id: int):
 
 
 @app.post("/answer", status_code=201)
-def create_answer(payload: UserAnswer):
+def create_answer(payload: UserAnswer):  # XXX: this fails mypy check
     payload = payload.dict()
 
     return api.create_answer(payload)

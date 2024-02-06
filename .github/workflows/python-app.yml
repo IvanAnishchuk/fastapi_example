@@ -32,9 +32,6 @@ jobs:
         run: |
           pip install pre-commit mypy
 
-      - name: precommit
-        uses: pre-commit/action@v3.0.0
-
       - name: mypy annotator
         uses: pr-annotators/mypy-pr-annotator@v1.0.0
 
@@ -44,15 +41,11 @@ jobs:
       - name: pylint annotator
         uses: pr-annotators/flake8-pr-annotator@v1.0.0
 
-      - name: mypy
-        run: |
-          mypy app/
-
-      - name: pylint
-        run: |
-          pylint $(git ls-files '*.py')
+      - name: precommit
+        uses: pre-commit/action@v3.0.0
 
       - name: flake8
+        # different flake8, just to demonstrate
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
